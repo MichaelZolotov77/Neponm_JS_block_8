@@ -1,9 +1,13 @@
-console.log("Hi there, me first");
+const promise1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("foo");
+  }, 300);
+});
 
-setTimeout(() => console.log("When is my turn?"), 0);
+promise1.then((value) => {
+  console.log(value);
+  // Expected output: "foo"
+});
 
-console.log("Am I list in the queue?");
-
-// Hi there, me first
-// Am I list in the queue?
-// When is my turn?
+console.log(promise1);
+// Expected output: [object Promise]
