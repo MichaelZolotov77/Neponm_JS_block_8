@@ -1,16 +1,26 @@
-const promise1 = new Promise((resolve, reject) => {
-  setTimeout(() => {
-    resolve(10);
-  }, 300);
-});
+function withPromose() {
+  return new Promise((resolve, reject) => {
+    reject("Hello from Promise");
+  });
+}
 
-promise1
-  .then((value) => {
-    return value + 4;
-  })
-  .then((val) => val - 1)
-  .then(console.dir)
-  .catch(console.error);
+console.log("Hi there, me first");
 
-console.log(promise1);
-// Expected output: [object Promise]
+setTimeout(() => console.log("When is my turn?"), 0);
+
+withPromose()
+  .then(console.log)
+  .catch((val) => console.log(val + "!!!"));
+
+console.log("Am I list in the queue?");
+
+// Hi there, me first
+// app.js:15 Am I list in the queue?
+// Hello from Promose
+// app.js:9 When is my turn?
+
+/* 
+Event Loop имеет две области - task queue и microtask queue.
+Promise попадает в microtask и поэтому выполняется быстрее, чем
+обычный task queue, в который попадает setTimeout()
+*/
