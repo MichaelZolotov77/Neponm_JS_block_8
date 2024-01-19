@@ -1,7 +1,12 @@
 // fetch по умолчанию работает как GET
-fetch("https://jsonplaceholder.typicode.com/posts/1", {
-  method: "PATCH",
-  body: JSON.stringify({ id: 1, title: "My title" }),
+fetch("https://jsonplaceholder.typicode.com/posts", {
+  method: "POST",
+  body: JSON.stringify({
+    id: 201,
+    title: "My title",
+    body: "Text",
+    userId: 1,
+  }),
 })
   .then((response) => {
     console.log(response);
