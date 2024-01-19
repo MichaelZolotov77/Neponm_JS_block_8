@@ -7,6 +7,9 @@ fetch("https://jsonplaceholder.typicode.com/posts", {
     body: "Text",
     userId: 1,
   }),
+  headers: {
+    "Content-Type": "application/json",
+  },
 })
   .then((response) => {
     console.log(response);
