@@ -1,4 +1,7 @@
-fetch("https://jsonplaceholder.typicode.com/posts/1")
+// fetch по умолчанию работает как GET
+fetch("https://jsonplaceholder.typicode.com/posts/1", {
+  method: "DELETE",
+})
   .then((response) => {
     console.log(response);
     if (response.ok) {
@@ -7,6 +10,7 @@ fetch("https://jsonplaceholder.typicode.com/posts/1")
     throw new Error("Failed to fetch");
   })
   .then(console.log)
-  .catch(console.error); // Failed to fetch
+  .catch(console.error);
 
-// Если ошибки в адресе нет
+// CRUD - create, read,   update,  delete
+// HTTP - POST,   GET,  PUT|PATCH, DELETE
