@@ -1,14 +1,36 @@
-// Это legacy способ, но в старых проектах встечается
+// fetch по умолчанию работает как GET
+// fetch("https://jsonplaceholder.typicode.com/posts", {
+//   method: "POST",
+//   body: JSON.stringify({
+//     id: 201,
+//     title: "My title",
+//     body: "Text",
+//     userId: 1,
+//   }),
+//   headers: {
+//     "Content-Type": "application/json",
+//   },
+// })
+//   .then((response) => {
+//     console.log(response);
+//     if (response.ok) {
+//       return response.json(); // преобразовывает json в объект JS
+//     }
+//     throw new Error("Failed to fetch");
+//   })
+//   .then(console.log)
+//   .catch(console.error);
 
-const url = "https://jsonplaceholder.typicode.com/posts/1";
+// CRUD - create, read,   update,  delete
+// HTTP - POST,   GET,  PUT|PATCH, DELETE
 
-const request = new XMLHttpRequest();
-console.log(request);
-request.open("GET", url);
-request.responseType = "json"; // xml, text
-request.send(); // отправляем запрос
-// ловим ответ
-request.onload = function () {
-  const data = request.response;
-  console.log(data); // приходит уже объект, преобразованный из json
-};
+async function getUsers() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const data = await response.json();
+  return data;
+}
+
+// const gerUser = async() => {}
+
+getUsers().then(console.log);
+console.log("1");
