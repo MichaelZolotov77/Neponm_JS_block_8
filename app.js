@@ -24,13 +24,15 @@
 // CRUD - create, read,   update,  delete
 // HTTP - POST,   GET,  PUT|PATCH, DELETE
 
+// если сделать return, async функция всегда возвращает promise
 async function getUsers() {
   const response = await fetch("https://jsonplaceholder.typicode.com/posts");
   const data = await response.json();
-  return data;
+  console.log(data);
 }
 
 // const gerUser = async() => {}
 
-getUsers().then(console.log);
+getUsers();
 console.log("1");
+console.log("2");
