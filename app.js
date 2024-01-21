@@ -1,25 +1,31 @@
+async function getPosts() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+  const data = await response.json();
+
+  return data; //[post1]
+}
+
 async function getUsers() {
-  try {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const data = await response.json();
-    console.log(data);
-    throw new Error("Failed!");
-  } catch (error) {
-    console.error(error.message);
-  }
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  const data = await response.json();
+
+  return data; //[user1]
 }
 
-async function getPictures() {
-  //   const response = await fetch("https://jsonplaceholder.typicode.com/pictures");
-  //   const data = await response.json();
-  //   return data;
+async function getComments() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/comments");
+  const data = await response.json();
 
-  // return Promise.resolve([
-  //   { id: 1, src: "" },
-  //   { id: 2, src: "" },
-  // ]);
-
-  return Promise.reject("Invalid user");
+  return data; //[comments1]
 }
 
-getPictures().then(console.log).catch();
+// Исполняются все промисы, и если даже один будет отклонен,
+// то и все остальные тоже будут отклонены. Это применяется,
+// когда нам обязательно нужны именно все данные
+Promise.all([getPosts(), getUsers(), getComments()])
+  .then((values) => {
+    console.log(values); // [[post1], [user1], [comments1]]
+    const [posts, users, comments] = values;
+    console.log(posts, users, comments);
+  })
+  .catch(console.error);
