@@ -1,31 +1,30 @@
-async function getPosts() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+async function getPostsBerlin() {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/berlin/posts"
+  );
   const data = await response.json();
 
   return data; //[post1]
 }
 
-async function getUsers() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+async function getPostsNewYork() {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/newyork/posts"
+  );
   const data = await response.json();
 
-  return data; //[user1]
+  return data; //[post1]
 }
 
-async function getComments() {
-  const response = await fetch("https://jsonplaceholder.typicode.com/comments");
+async function getPostsDefault() {
+  const response = await fetch(
+    "https://jsonplaceholder.typicode.com/default/posts"
+  );
   const data = await response.json();
 
-  return data; //[comments1]
+  return data; //[post1]
 }
 
-// Исполняются все промисы, и если даже один будет отклонен,
-// то и все остальные тоже будут отклонены. Это применяется,
-// когда нам обязательно нужны именно все данные
-Promise.all([getPosts(), getUsers(), getComments()])
-  .then((values) => {
-    console.log(values); // [[post1], [user1], [comments1]]
-    const [posts, users, comments] = values;
-    console.log(posts, users, comments);
-  })
-  .catch(console.error);
+// Исполнится только один промис, в отличие от Promose.all()
+// Тот, который придет первым.
+Promise.race([getPostsBerlin(), getPostsNewYork(), getPostsDefault()]).then();
